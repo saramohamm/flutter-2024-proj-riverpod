@@ -7,7 +7,7 @@ void main() {
   testWidgets('loginScreen Widget Test', (WidgetTester tester) async {
     // Build the loginScreen widget
     await tester.pumpWidget(MaterialApp(
-      home: loginScreen(),
+      home: LoginScreen(),
     ));
 
     // Verify that the title and necessary input fields are rendered correctly

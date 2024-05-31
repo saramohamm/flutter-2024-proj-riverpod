@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../presentation/screen/AddCarPage.dart';
+import '../presentation/screen/AddUserPage.dart';
 import '../presentation/screen/admin_page.dart';
 import '../presentation/screen/available_cars.dart';
 import '../presentation/screen/book_car.dart';
@@ -8,7 +8,7 @@ import '../presentation/screen/loginScreen.dart';
 import '../presentation/screen/payment.dart';
 import '../presentation/screen/regScreen.dart';
 import '../presentation/screen/showroom.dart';
-import '../presentation/screen/UpdateCarPage.dart';
+import '../presentation/screen/UpdateUserPage.dart';
 import '../presentation/screen/WelcomeScreen.dart';
 
 GoRouter appRouter = GoRouter(
@@ -21,14 +21,14 @@ GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       path: "/signup",
-      pageBuilder: (context, state) => const MaterialPage(
+      pageBuilder: (context, state) =>  MaterialPage(
         child: RegScreen(),
       ),
     ),
     GoRoute(
       path: "/login",
-      pageBuilder: (context, state) => const MaterialPage(
-        child: loginScreen(),
+      pageBuilder: (context, state) => MaterialPage(
+        child: LoginScreen(),
       ),
     ),
     GoRoute(
@@ -43,7 +43,6 @@ GoRouter appRouter = GoRouter(
         child: AvailableCars(),
       ),
     ),
-    
     GoRoute(
       path: "/pay",
       pageBuilder: (context, state) => const MaterialPage(
@@ -53,7 +52,7 @@ GoRouter appRouter = GoRouter(
     GoRoute(
       path: "/add",
       pageBuilder: (context, state) => const MaterialPage(
-        child: AddCarPage(),
+        child: AddUserPage(),
       ),
     ),
     GoRoute(
@@ -62,7 +61,6 @@ GoRouter appRouter = GoRouter(
         child: AdminPage(),
       ),
     ),
-    
     GoRoute(
       path: "/welcome",
       pageBuilder: (context, state) => const MaterialPage(

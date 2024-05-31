@@ -8,28 +8,33 @@ import 'user_session_provider.dart';
 
 final userListProvider = AsyncNotifierProvider.autoDispose
     .family<UserNotifier, List<User>, String>(UserNotifier.new);
-    
-    class AsyncNotifierProvider {
-      static var autoDispose;
-    }
+
+class AsyncNotifierProvider {
+  static var autoDispose;
+}
 
 final currentUserProvider = FutureProvider.autoDispose((ref) async {
   return await ref
-      .watch(userListProvider(ref.read(userSessionProvider).token!).notifier)
+      .watch(
+          userListProvider(ref.read(userSessionProvider as ProviderBase).token!)
+              .notifier)
       .getCurrentUser();
 });
 
+mixin userSessionProvider {}
+
 class UserNotifier {
   String token = "";
-  
+
   get ref => null;
-  
+
   get future => null;
 
   @override
   Future<List<User>> build(String arg) async {
     token = arg;
-    final UsersRepository usersRepository = UsersRepository(UsersApiService() as UsersDataProvider);
+    final UsersRepository usersRepository =
+        UsersRepository(UsersApiService() as UsersDataProvider);
     return await usersRepository.getUsers();
   }
 
@@ -39,35 +44,39 @@ class UserNotifier {
   }
 
   Future<User> getCurrentUser() async {
-    final UsersRepository usersRepository = UsersRepository(UsersApiService() as UsersDataProvider);
+    final UsersRepository usersRepository =
+        UsersRepository(UsersApiService() as UsersDataProvider);
     await refresh();
     return await usersRepository.getCurrentUser(token);
   }
 
   Future<void> promoteUser(int userId) async {
-    final UsersRepository usersRepository = UsersRepository(UsersApiService() as UsersDataProvider);
+    final UsersRepository usersRepository =
+        UsersRepository(UsersApiService() as UsersDataProvider);
     await usersRepository.toggleAdmin(userId, token);
     await refresh();
   }
 
   Future<void> demoteUser(int userId) async {
-    final UsersRepository usersRepository = UsersRepository(UsersApiService() as UsersDataProvider);
+    final UsersRepository usersRepository =
+        UsersRepository(UsersApiService() as UsersDataProvider);
     await usersRepository.toggleAdmin(userId, token);
     await refresh();
   }
 
   Future<void> updateUser(User user, String newPassword) async {
-    final UsersRepository usersRepository = UsersRepository(UsersApiService() as UsersDataProvider);
+    final UsersRepository usersRepository =
+        UsersRepository(UsersApiService() as UsersDataProvider);
     await usersRepository.updateUser(user, newPassword);
     await refresh();
   }
 
   Future<void> deleteUser(User user) async {
-    final UsersRepository usersRepository = UsersRepository(UsersApiService() as UsersDataProvider);
+    final UsersRepository usersRepository =
+        UsersRepository(UsersApiService() as UsersDataProvider);
     await usersRepository.deleteUser(user.id!);
     await refresh();
   }
 }
 
-class AutoDisposeFamilyAsyncNotifier {
-}
+class AutoDisposeFamilyAsyncNotifier {}

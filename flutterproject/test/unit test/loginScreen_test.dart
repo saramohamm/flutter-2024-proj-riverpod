@@ -6,7 +6,7 @@ import 'package:flutterproject/presentation/screen/showroom.dart';
 void main() {
   testWidgets('loginScreen displays correctly', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
-      home: loginScreen(),
+      home: LoginScreen(),
     ));
 
     // Verify that the gradient background is displayed
@@ -30,7 +30,7 @@ void main() {
 
   testWidgets('loginScreen navigates to Showroom', (WidgetTester tester) async {
     await tester.pumpWidget(MaterialApp(
-      home: loginScreen(),
+      home: LoginScreen(),
     ));
 
     // Tap on the sign in button

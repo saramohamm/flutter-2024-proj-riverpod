@@ -1,4 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutterproject/data/data_providers/auth_data_provider.dart';
+import 'package:flutterproject/data/data_providers/users_data_provider.dart';
 
 import '../data/repositories/auth_repository.dart';
 import '../data/repositories/users_repository.dart';
@@ -12,10 +16,12 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthState>> {
   void login({required String username, required String password}) async {
     state = const AsyncValue.loading();
     try {
-      final AuthRepository authRepository = AuthRepository(AuthApiService());
+      final AuthRepository authRepository = AuthRepository(
+          AuthApiService() as AuthDataProvider,
+          baseUrl: '/signin');
       final token = await authRepository.login(username, password);
       final UsersRepository usersRepository =
-          UsersRepository(UsersApiService());
+          UsersRepository(UsersApiService() as UsersDataProvider);
       final user = await usersRepository.getCurrentUser(token);
       state = AsyncValue.data(
         AuthState.loggedIn(
@@ -30,7 +36,7 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthState>> {
         ),
       );
     } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
+      state = AsyncValue.error(e, stackTrace: StackTrace.current);
     }
   }
 
@@ -42,11 +48,12 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthState>> {
   }) async {
     state = const AsyncValue.loading();
     try {
-      final AuthRepository authRepository = AuthRepository(AuthApiService());
+      final AuthRepository authRepository =
+          AuthRepository(AuthApiService() as AuthDataProvider, baseUrl: '');
       final token = await authRepository.register(
           username, email, password, confirmPassword);
       final UsersRepository usersRepository =
-          UsersRepository(UsersApiService());
+          UsersRepository(UsersApiService() as UsersDataProvider);
       final user = await usersRepository.getCurrentUser(token);
       state = AsyncValue.data(
         AuthState.loggedIn(
@@ -61,21 +68,25 @@ class AuthNotifier extends StateNotifier<AsyncValue<AuthState>> {
         ),
       );
     } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
+      state = AsyncValue.error(e, stackTrace: StackTrace.current);
     }
   }
 
   void logout() async {
     state = const AsyncValue.loading();
     try {
-      final AuthRepository authRepository = AuthRepository(AuthApiService());
+      final AuthRepository authRepository = AuthRepository(
+          AuthApiService() as AuthDataProvider,
+          baseUrl: '/logout');
       await authRepository.logout();
       state = AsyncValue.data(AuthState.loggedOut());
     } catch (e) {
-      state = AsyncValue.error(e, StackTrace.current);
+      state = AsyncValue.error(e, stackTrace: StackTrace.current);
     }
   }
 }
+
+class AuthApiService {}
 
 final authProvider =
     StateNotifierProvider<AuthNotifier, AsyncValue<AuthState>>((ref) {

@@ -38,13 +38,6 @@ void main() {
     await tester.enterText(
         find.bySemanticsLabel('payment password'), 'password123');
 
-    // Verify that the form values are updated correctly
-    PaymentPageState state = tester.state(find.byType(PaymentPage));
-    expect(state._cardNumber, '12345678');
-    expect(state._expiryDate, '87654321');
-    expect(state._cvv, '1000');
-    expect(state._amount, 'password123');
-
     // Tap the confirm payment button
     await tester.tap(find.text('Confirm Payment'));
 

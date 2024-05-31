@@ -1,53 +1,27 @@
-import 'package:flutterproject/presentation/screen/AddCarPage.dart';
-import 'package:flutterproject/presentation/screen/UpdateCarPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterproject/presentation/screen/AddUserPage.dart';
+import 'package:flutterproject/presentation/screen/UpdateUserPage.dart';
+
+import '../../models/users.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Car Rental App',
+    title: 'User Management App',
     home: AdminPage(),
   ));
 }
 
 class AdminPage extends StatefulWidget {
-    const AdminPage({super.key});
+  const AdminPage({super.key});
 
   @override
   _AdminPageState createState() => _AdminPageState();
 }
 
 class _AdminPageState extends State<AdminPage> {
-  List<Car> cars = [
-    Car(
-      name: 'Marcedes',
-      photoAsset: 'assets/images/car1.jpg',
-      color: 'Red',
-      gearbox: 'Automatic',
-      seat: 5,
-      motor: 'V6',
-      speed: 200,
-      topSpeed: 250,
-    ),
-    Car(
-      name: 'BMW',
-      photoAsset: 'assets/images/car2.jpg',
-      color: 'Blue',
-      gearbox: 'Manual',
-      seat: 4,
-      motor: 'V8',
-      speed: 220,
-      topSpeed: 270,
-    ),
-    Car(
-      name: 'KIA',
-      photoAsset: 'assets/images/car3.jpg',
-      color: 'Green',
-      gearbox: 'Automatic',
-      seat: 7,
-      motor: 'V4',
-      speed: 180,
-      topSpeed: 210,
-    ),
+  List<User> users = [
+    User(name: 'John Doe', email: 'john@example.com', isApproved: true),
+    User(name: 'Jane Smith', email: 'jane@example.com', isApproved: false),
   ];
 
   @override
@@ -64,28 +38,18 @@ class _AdminPageState extends State<AdminPage> {
           ),
         ),
         child: ListView.builder(
-          itemCount: cars.length,
+          itemCount: users.length,
           itemBuilder: (context, index) {
             return Card(
               color: Colors.blue,
               child: ListTile(
-                leading: Image.asset(
-                  cars[index].photoAsset,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                ),
                 title: Text(
-                  cars[index].name,
+                  users[index].name,
                   style: TextStyle(color: Colors.white),
                 ),
                 subtitle: Text(
-                  'Color: ${cars[index].color}\n'
-                  'Gearbox: ${cars[index].gearbox}\n'
-                  'Seat: ${cars[index].seat}\n'
-                  'Motor: ${cars[index].motor}\n'
-                  'Speed: ${cars[index].speed}\n'
-                  'Top Speed: ${cars[index].topSpeed}',
+                  'Email: ${users[index].email}\n'
+                  'Status: ${users[index].isApproved ? "Approved" : "Pending"}',
                   style: TextStyle(color: Colors.white),
                 ),
                 trailing: Row(
@@ -99,7 +63,7 @@ class _AdminPageState extends State<AdminPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                UpdateCarPage(car: cars[index]),
+                                UpdateUserPage(user: users[index]),
                           ),
                         );
                       },
@@ -109,7 +73,20 @@ class _AdminPageState extends State<AdminPage> {
                       color: Colors.white,
                       onPressed: () {
                         setState(() {
-                          cars.removeAt(index);
+                          users.removeAt(index);
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(users[index].isApproved ? Icons.close : Icons.check),
+                      color: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          users[index] = User(
+                            name: users[index].name,
+                            email: users[index].email,
+                            isApproved: !users[index].isApproved,
+                          );
                         });
                       },
                     ),
@@ -125,37 +102,15 @@ class _AdminPageState extends State<AdminPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddCarPage(),
+              builder: (context) => AddUserPage(),
             ),
           );
         },
-        label: Text('Add Car'),
+        label: Text('Add User'),
         icon: Icon(Icons.add),
         backgroundColor: Colors.blue,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-}
-
-class Car {
-  final String name;
-  final String photoAsset;
-  final String color;
-  final String gearbox;
-  final int seat;
-  final String motor;
-  final int speed;
-  final int topSpeed;
-
-  Car({
-    required this.name,
-    required this.photoAsset,
-    required this.color,
-    required this.gearbox,
-    required this.seat,
-    required this.motor,
-    required this.speed,
-    required this.topSpeed,
-  });
 }

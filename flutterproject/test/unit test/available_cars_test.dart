@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutterproject/constants.dart';
 import 'package:flutterproject/presentation/screen/available_Cars.dart';
 import 'package:flutterproject/presentation/screen/book_Car.dart';
 import 'package:flutterproject/data.dart';
@@ -24,7 +25,7 @@ void main() {
     expect(find.byType(GridView), findsOneWidget);
 
     // Verify that the cars are displayed
-    expect(find.byType(CarWidget), findsNWidgets(getCarList().length));
+    expect(find.byType(Car), findsNWidgets(getCarList().length));
 
     // Verify that the bottom navigation bar is displayed
     expect(find.byType(Container), findsOneWidget);
@@ -43,7 +44,7 @@ void main() {
     ));
 
     // Tap on a car
-    await tester.tap(find.byType(CarWidget).first);
+    await tester.tap(find.byType(Car).first);
 
     // Verify that the BookCar screen is displayed
     expect(find.byType(BookCar), findsOneWidget);
@@ -70,3 +71,5 @@ void main() {
         ));
   });
 }
+
+hasStyle(TextStyle textStyle) {}

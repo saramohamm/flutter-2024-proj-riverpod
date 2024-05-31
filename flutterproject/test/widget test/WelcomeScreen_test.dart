@@ -36,7 +36,7 @@ void main() {
     await tester.tap(find.text('SIGN IN'));
 
     // Verify that the login screen is displayed
-    expect(find.byType(loginScreen), findsOneWidget);
+    expect(find.byType(LoginScreen), findsOneWidget);
   });
 
   testWidgets('WelcomeScreen navigates to registration screen',
