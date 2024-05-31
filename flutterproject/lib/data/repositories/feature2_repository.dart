@@ -1,5 +1,5 @@
 import 'dart:convert';
-import '../../models/user.dart';
+import '../../models/users.dart';
 import '../data_providers/feature2_data_provider.dart';
 
 class UsersRepository {

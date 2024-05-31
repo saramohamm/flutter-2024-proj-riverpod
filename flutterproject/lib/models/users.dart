@@ -10,4 +10,8 @@ class User {
   });
 
   String? get status => null;
+
+  static fromJson(user) {}
+
+  
 }

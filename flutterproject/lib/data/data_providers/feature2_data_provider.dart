@@ -52,7 +52,7 @@ class UsersDataProvider {
       throw Exception('Failed to update user');
     }
   }
-
+//////
   Future<void> deleteUser(String email, String token) async {
     final response = await http.delete(
       Uri.parse('$baseUrl/users/$email'),

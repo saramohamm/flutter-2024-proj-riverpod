@@ -65,7 +65,6 @@ class RegScreen extends StatelessWidget {
   
     return Scaffold(
         body: Stack(
-      //thanks for watching
       children: [
         Container(
           height: double.infinity,
@@ -163,13 +162,11 @@ class RegScreen extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Show a snackbar
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Signup successful!'),
                         ),
                       );
-                      // Navigate to the LoginScreen
                       Navigator.popAndPushNamed(context, '/login');
                     },
                     style: ButtonStyle(
