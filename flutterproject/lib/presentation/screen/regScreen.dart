@@ -61,176 +61,171 @@ class RegScreen extends StatelessWidget {
       }
     }
 
+
+  
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 54, 113, 181),
-                Color(0xff281537),
-              ]),
-            ),
-            child: const Padding(
-              padding: EdgeInsets.only(top: 60.0, left: 22),
-              child: Text(
-                'Start Your Journey Today\n Create Your Account',
-                style: TextStyle(
+        body: Stack(
+      //thanks for watching
+      children: [
+        Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Color.fromARGB(255, 54, 113, 181),
+              Color(0xff281537),
+            ]),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.only(top: 60.0, left: 22),
+            child: Text(
+              'Start Your Journey Today\n Create Your Account',
+              style: TextStyle(
                   fontSize: 30,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 200.0),
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40)),
-                color: Colors.white,
-              ),
-              height: double.infinity,
-              width: double.infinity,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextFormField(
-                        controller: _nameController,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ),
-                          labelText: 'Full Name',
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 7, 0, 2),
-                          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 200.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40), topRight: Radius.circular(40)),
+              color: Colors.white,
+            ),
+            height: double.infinity,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 18.0, right: 18),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const TextField(
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.check,
+                          color: Colors.grey,
                         ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your full name';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: _emailController,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.check,
-                            color: Colors.green,
-                          ),
-                          labelText: 'Gmail',
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 7, 0, 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                      ),
-                      TextFormField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          suffixIcon: Icon(
-                            Icons.visibility_off,
-                            color: Colors.grey,
-                          ),
-                          labelText: 'Password',
-                          labelStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 7, 0, 2),
-                          ),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          return null;
-                        },
-                        obscureText: true,
-                      ),
-                      const SizedBox(height: 50),
-                      ElevatedButton(
-                        onPressed: () {
-                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Showroom(),
-                            ),
-                          ); },
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color.fromARGB(255, 37, 88, 176),
-                          ),
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        ),
-                        child: Container(
-                          height: 55,
-                          width: 300,
-                          alignment: Alignment.center,
-                          child: const Text(
-                            'SIGN UP',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      if (_formKey.currentState != null &&
-                          !_formKey.currentState!.validate())
-                        Text(
-                          'Please fill in all required fields',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginScreen()),
-                          );
-                        },
-                        child: const Text(
-                          "Already have an Account? Sign in",
+                        label: Text(
+                          'Full Name',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: Colors.black,
+                            color: Color.fromARGB(255, 7, 0, 2),
                           ),
+                        )),
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.check,
+                          color: Colors.grey,
+                        ),
+                        label: Text(
+                          'Phone or Gmail',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 7, 0, 2),
+                          ),
+                        )),
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.visibility_off,
+                          color: Colors.grey,
+                        ),
+                        label: Text(
+                          'Password',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 7, 0, 2),
+                          ),
+                        )),
+                  ),
+                  const TextField(
+                    decoration: InputDecoration(
+                        suffixIcon: Icon(
+                          Icons.visibility_off,
+                          color: Colors.grey,
+                        ),
+                        label: Text(
+                          'Confirm Password',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 7, 0, 2),
+                          ),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Show a snackbar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Signup successful!'),
+                        ),
+                      );
+                      // Navigate to the LoginScreen
+                      Navigator.popAndPushNamed(context, '/login');
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color.fromARGB(255, 37, 88, 176),
+                      ),
+                      shape: MaterialStateProperty.all<OutlinedBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                    ],
+                    ),
+                    child: Container(
+                      height: 55,
+                      width: 300,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.grey),
+                        ),
+                        Text(
+                          "Sign in",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17,
+                              color: Colors.black),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ));
   }
 }
