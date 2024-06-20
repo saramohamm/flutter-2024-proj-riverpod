@@ -20,8 +20,8 @@ class AdminPage extends StatefulWidget {
 
 class _AdminPageState extends State<AdminPage> {
   List<User> users = [
-    User(name: 'John Doe', email: 'john@example.com', isApproved: true),
-    User(name: 'Jane Smith', email: 'jane@example.com', isApproved: false),
+    User(name: 'abebe', email: 'abebe.com', isApproved: true),
+    User(name: 'aster', email: 'aster.com', isApproved: false),
   ];
 
   @override
